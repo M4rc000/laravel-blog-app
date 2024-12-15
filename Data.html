@@ -1,0 +1,74 @@
+// DATA POST
+Post::create([
+'title' => 'Superman',
+'category_id' => 1,
+'slug' => 'superman',
+'author' => 'Jerry Siegel & Joe Shuster',
+'exerpt' => 'Superman, seorang bayi dari planet Krypton, dikirim ke Bumi sebelum planetnya hancur.',
+'body' => 'Superman, seorang bayi dari planet Krypton, dikirim ke Bumi sebelum planetnya hancur. Dibesarkan oleh pasangan petani di Smallville, ia tumbuh dengan kekuatan luar biasa akibat paparan Matahari Bumi. Sebagai Clark Kent, ia bekerja sebagai jurnalis di Daily Planet, namun sebagai Superman, ia melindungi dunia dari ancaman seperti Lex Luthor dan alien jahat lainnya.'
+])
+
+Post::create([
+'title' => 'Batman',
+'category_id' => 2,
+'slug' => 'batman',
+'author' => 'Bob Kane & Bill Finger',
+'exerpt' => 'Setelah menyaksikan pembunuhan orang tuanya di Gotham City, Bruce Wayne bersumpah untuk memerangi kejahatan.',
+'body' => 'Setelah menyaksikan pembunuhan orang tuanya di Gotham City, Bruce Wayne bersumpah untuk memerangi kejahatan. Dengan kekayaan dan kecerdasan luar biasa, ia menciptakan identitas Batman, lengkap dengan alat canggih dan pelatihan bela diri. Ia menghadapi musuh seperti Joker, Penguin, dan Bane, berusaha membawa keadilan tanpa membunuh.'
+])
+
+Post::create([
+'title' => 'Spider-Man',
+'category_id' => 3,
+'slug' => 'spider-man',
+'author' => 'Stan Lee & Steve Ditko',
+'exerpt' => 'Peter Parker, seorang remaja kutu buku, digigit laba-laba radioaktif yang memberinya kekuatan super seperti memanjat tembok dan indra laba-laba.',
+'body' => 'Peter Parker, seorang remaja kutu buku, digigit laba-laba radioaktif yang memberinya kekuatan super seperti memanjat tembok dan indra laba-laba. Setelah kematian pamannya, ia belajar bahwa "dengan kekuatan besar datang tanggung jawab besar." Ia melawan musuh seperti Green Goblin dan Dr. Octopus sambil menyeimbangkan hidupnya sebagai siswa dan pahlawan.'
+])
+
+Post::create([
+'title' => 'Wonder Woman',
+'category_id' => 4,
+'slug' => 'wonder-woman',
+'author' => 'William Moulton Marston',
+'exerpt' => 'Diana, seorang putri Amazon dari pulau Themyscira, meninggalkan rumahnya untuk menyelamatkan dunia dari kehancuran selama Perang Dunia I.',
+'body' => 'Diana, seorang putri Amazon dari pulau Themyscira, meninggalkan rumahnya untuk menyelamatkan dunia dari kehancuran selama Perang Dunia I. Sebagai Wonder Woman, ia menggunakan kekuatan, kebijaksanaan, dan senjata magis seperti Lasso of Truth untuk melawan musuh yang berusaha menghancurkan umat manusia.'
+])
+
+Post::create([
+'title' => 'Iron Man',
+'category_id' => 5,
+'slug' => 'iron-man',
+'author' => 'Stan Lee, Larry Lieber, Don Heck, & Jack Kirby',
+'exerpt' => 'Tony Stark, seorang genius teknologi dan miliarder, menciptakan armor bertenaga tinggi untuk menyelamatkan hidupnya setelah disandera.',
+'body' => 'Tony Stark, seorang genius teknologi dan miliarder, menciptakan armor bertenaga tinggi untuk menyelamatkan hidupnya setelah disandera. Setelah itu, ia terus menyempurnakan armornya untuk melawan ancaman global seperti Mandarin dan Thanos, sambil menghadapi masalah pribadi seperti alkoholisme dan krisis identitas.'
+])
+
+
+
+
+// DATA CATEGORIES
+Category::create([
+'name' => 'Pahlawan super klasik',
+'slug' => 'pahlawan-super-klasik',
+])
+
+Category::create([
+'name' => 'Pahlawan super tanpa kekuatan',
+'slug' => 'pahlawan-super-tanpa-kekuatan',
+])
+
+Category::create([
+'name' => 'Pahlawan super remaja',
+'slug' => 'pahlawan-super-remaja',
+])
+
+Category::create([
+'name' => 'Pahlawan super mitologi',
+'slug' => 'pahlawan-super-mitologi',
+])
+
+Category::create([
+'name' => 'Pahlawan super teknologi',
+'slug' => 'pahlawan-super-teknologi',
+])
