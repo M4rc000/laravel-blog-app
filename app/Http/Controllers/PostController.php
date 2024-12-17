@@ -27,7 +27,7 @@ class PostController extends Controller
             ->where('user_id', $user_id)
             ->personalFilter(request(['search', 'category']));
 
-        return view('my_post', [
+        return view('my-post/my_post', [
             'title' => 'My Posts',
             'post_count' => $query->count(),
             'posts' => $query->paginate(7)->withQueryString(),
@@ -46,7 +46,7 @@ class PostController extends Controller
             ->where('category_id', $category->id)
             ->postFilterCategory(request(['search']));
 
-        return view('my_post', [
+        return view('my-post/my_post', [
             'title' => 'My Posts',
             'posts' => $query->paginate(7)->withQueryString(),
             'category' => $category,
@@ -61,4 +61,16 @@ class PostController extends Controller
             'categories' => Category::withCount('posts')->get()
         ]);
     }
+    
+    public function create_new_post()
+    {
+        return view('my-post/new_post', [
+            'title' => 'Create New Post',
+            'categories' => Category::withCount('posts')->get()
+        ]);
+    }
+
+    // public function checkSlug(Request $request){
+
+    // }
 }

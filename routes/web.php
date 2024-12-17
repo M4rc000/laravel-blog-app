@@ -48,11 +48,17 @@ Route::middleware('auth')->group(function (){
         
     Route::get('my-post/all', [PostController::class, 'personal_post']);
     
+    Route::get('my-post/createPost', [PostController::class, 'create_new_post']);
+
     Route::get('my-post/{category:slug}', [PostController::class, 'personal_post_per_category']);
-    
+
     Route::get('blog', [PostController::class, 'index']);
     
     Route::get('blog/{post:slug}', [PostController::class, 'show']);
+    
+    Route::get('my-post/detail/{post:slug}', [PostController::class, 'show']);
+    
+    Route::get('my-post/createSlug', [PostController::class, 'checkSlug']);
     
     Route::get('categories/', [CategoryController::class, 'show_categories']);
 });

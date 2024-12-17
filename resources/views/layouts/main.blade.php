@@ -25,6 +25,9 @@
     {{-- JQUERY 3.7.1 --}}
     <script src="{{ asset('assets/home/js/jquery.min.js') }}"></script>
 
+    {{-- SELECT2 --}}
+    <link href="{{ asset('assets/home/vendor/select2/select2.min.css') }}" rel="stylesheet" />
+
     <style>
         @font-face {
             font-family: 'Delicious Handrawn';
@@ -43,6 +46,14 @@
             box-shadow-sm: 0 .125rem .25rem rgba($black, .075);
             box-shadow-lg: 0 1rem 3rem rgba($black, .175);
             box-shadow-inset: inset 0 1px 2px rgba($black, .075);
+        }
+        .select2-container {
+            z-index: 99;
+        }
+
+        .select2-selection {
+            padding-top: 4px !important;
+            height: 38px !important;
         }
     </style>
 </head>
@@ -130,7 +141,9 @@
     <script src="{{ asset('assets/home/js/demo/chart-pie-demo.js')}}"></script>
 
     {{-- SWEET ALERT --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('assets/home/vendor/sweetalert/sweetalert.js') }}"></script>
 
+    {{-- SELECT2 --}}
+    <script src="{{ asset('assets/home/vendor/select2/select2.min.js') }}"></script>
 </body>
 </html>
