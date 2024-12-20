@@ -23,7 +23,7 @@
     </div>
 </form>
 
-<a href="/my-post/createPost">
+<a href="/my-post/newPost">
     <button type="button" class="btn btn-primary my-2">New post</button>
 </a>
 
@@ -35,7 +35,7 @@
     </div>
 </div>
 <div class="card mb-3">
-    <img src="{{ asset('assets/img/posts/' . $posts[0]->picture) }}"
+    <img src="{{ asset('storage') . '/' .  $posts[0]->picture }}"
         class="card-img-top img-fluid" alt="{{ $posts[0]->title }}" style="height: auto; max-height: 400px;">
     <div class="card-body">
         <div class="row">
@@ -44,7 +44,7 @@
             </div>
             <div class="col text-end d-flex justify-content-end align-items-center">
                 <h5 class="card-title">
-                    {!! $posts[0]->visibility == 'public' ? '<i class="bi bi-eye-fill"></i>' : '<i class="bi bi-eye-slash-fill"></i>' !!}
+                    {!! $posts[0]->visibility == 'Public' ? '<i class="bi bi-eye-fill"></i>' : '<i class="bi bi-eye-slash-fill"></i>' !!}
                 </h5>                
             </div>
         </div>
@@ -62,7 +62,7 @@
                 <a class="badge badge-primary mx-1 p-2" href="/my-post/detail/{{ $posts[0]->slug }}" style="text-decoration: none">
                     <i class="bi bi-arrow-up-right-square"></i>
                 </a>
-                <a class="badge badge-warning mx-1 p-2" href="#" style="text-decoration: none" data-toggle="modal" data-target="#editModal{{ $posts[0]->slug }}">
+                <a class="badge badge-warning mx-1 p-2" href="/my-post/editPost/{{ $posts[0]->slug }}" style="text-decoration: none">
                     <i class="bi bi-pencil"></i>
                 </a>
                 <a class="badge badge-danger mx-1 p-2" href="#" style="text-decoration: none" data-toggle="modal" data-target="#deleteModal{{ $posts[0]->slug }}">
@@ -77,7 +77,7 @@
     @foreach ($posts->skip(1) as $post)
     <div class="col mt-3">
         <div class="card h-100 shadow">
-            <img src="/assets/img/posts/{{ $post->picture }}" class="card-img-top img-fluid" alt="{{ $post->picture }}"
+            <img src="{{ asset('storage') . '/' . $post->picture }}" class="card-img-top img-fluid" alt="{{ $post->picture }}"
                 style="height: auto; max-height: 250px;">
             <div class="card-body">
                 <div class="row">
@@ -104,7 +104,7 @@
                         <a class="badge badge-primary mx-1 p-2" href="/my-post/detail/{{ $post->slug }}" style="text-decoration: none">
                             <i class="bi bi-arrow-up-right-square"></i>
                         </a>
-                        <a class="badge badge-warning mx-1 p-2" href="#" style="text-decoration: none" data-toggle="modal" data-target="#editModal{{ $post->slug }}">
+                        <a class="badge badge-warning mx-1 p-2" href="/my-post/editPost/{{ $post->slug }}" style="text-decoration: none">
                             <i class="bi bi-pencil"></i>
                         </a>
                         <a class="badge badge-danger mx-1 p-2" href="#" style="text-decoration: none" data-toggle="modal" data-target="#deleteModal{{ $post->slug }}">
@@ -129,49 +129,55 @@
 
 <!-- DELETE MODAL -->
 @foreach ($posts as $post)
-<div class="modal deleteModal fade" id="deleteModal{{ $post->slug }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit post</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+<form action="/my-post/deletePost/{{ $post->slug }}" method="POST">
+    {{-- @method('delete') --}}
+    @csrf
+    <div class="modal deleteModal fade" id="deleteModal{{ $post->slug }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="font-size: 18px">
+                Do you want to delete post <b>{{ $post->title }}</b> ?            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
         </div>
     </div>
-</div>
+</form>
 @endforeach
 
 <script src="{{ asset('assets/home/js/jquery.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        // $('.editModal').on('shown.bs.modal', function() {
-        //     // Set the dropdown parent to the modal itself
-        //     $(this).find('#category').select2({
-        //         dropdownParent: $(this)
-        //     });
-        //     $(this).find('#status').select2({
-        //         dropdownParent: $(this)
-        //     });
-
-        //     const title = $('title');
-        //     const slug = $('slug');
-
-        //     title.on('click', function(){
-        //         fetch('/my-post/createSlug?tile=' + title.value)
-        //         .then(response => response.json())
-        //         .then(data => slug.value = data.slug)
-        //     });
-        // });
-
+        @if (session()->has('success_create'))   
+            Swal.fire({
+                title: "Success",
+                text: "New post has been added!",
+                icon: "success"
+            });
+        @endif
+        @if (session()->has('success_update'))   
+            Swal.fire({
+                title: "Success",
+                text: "Post has been updated!",
+                icon: "success"
+            });
+        @endif
+        @if (session()->has('success_delete'))   
+            Swal.fire({
+                title: "Success",
+                text: "Post has been deleted!",
+                icon: "success"
+            });
+        @endif
     });
 </script>
 @endsection

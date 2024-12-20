@@ -28,6 +28,9 @@
     {{-- SELECT2 --}}
     <link href="{{ asset('assets/home/vendor/select2/select2.min.css') }}" rel="stylesheet" />
 
+    {{-- TRIX --}}
+    <link rel="stylesheet" href="{{ asset('assets/home/vendor/trix/trix.css') }}">
+
     <style>
         @font-face {
             font-family: 'Delicious Handrawn';
@@ -54,6 +57,10 @@
         .select2-selection {
             padding-top: 4px !important;
             height: 38px !important;
+        }
+
+        trix-toolbar [data-trix-button-group="file-tools"]{
+            display: none;
         }
     </style>
 </head>
@@ -134,16 +141,26 @@
     <script src="{{ asset('assets/home/js/sb-admin-2.min.js')}}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('assets/home/vendor/chart.js/Chart.min.js')}}"></script>
+    {{-- <script src="{{ asset('assets/home/vendor/chart.js/Chart.min.js')}}"></script> --}}
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('assets/home/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{ asset('assets/home/js/demo/chart-pie-demo.js')}}"></script>
+    {{-- <script src="{{ asset('assets/home/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{ asset('assets/home/js/demo/chart-pie-demo.js')}}"></script> --}}
 
     {{-- SWEET ALERT --}}
     <script src="{{ asset('assets/home/vendor/sweetalert/sweetalert.js') }}"></script>
 
     {{-- SELECT2 --}}
     <script src="{{ asset('assets/home/vendor/select2/select2.min.js') }}"></script>
+
+    {{-- TRIX --}}
+    <script src="{{ asset('assets/home/vendor/trix/trix.js') }}"></script>
+
+    <script>
+        $('.custom-file-input').on('change', function() {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+    </script>
 </body>
 </html>

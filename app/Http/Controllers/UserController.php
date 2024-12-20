@@ -8,6 +8,13 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function index(){
+        return view('user.user', [
+            'title' => 'User profile',
+            'categories' => Category::withCount('posts')->get()
+        ]);
+    }
+
     public function show_a_user_post(User $user){
         return view('user_post', [
             'title' => $user->name,

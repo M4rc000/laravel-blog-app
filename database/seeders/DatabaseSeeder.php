@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Superman',
-            'picture' => 'superman.jpg',
+            'picture' => 'post-img/superman.jpg',
             'category_id' => 1,
             'user_id' => 1,
             'visibility' => 'Public',
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             
         Post::create([
             'title' => 'Batman',
-            'picture' => 'Batman.webp',
+            'picture' => 'post-img/Batman.webp',
             'category_id' => 2,
             'user_id' => 1,
             'visibility' => 'Public',
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Spider-Man',
-            'picture' => 'spiderman.jfif',
+            'picture' => 'post-img/spiderman.jfif',
             'category_id' => 3,
             'user_id' => 2,
             'visibility' => 'Private',
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Wonder Woman',
-            'picture' => 'wonderwoman.jfif',
+            'picture' => 'post-img/wonderwoman.jfif',
             'category_id' => 4,
             'user_id' => 2,
             'visibility' => 'Public',
@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Iron Man',
-            'picture' => 'ironman.jfif',
+            'picture' => 'post-img/ironman.jfif',
             'category_id' => 5,
             'user_id' => 2,
             'visibility' => 'Public',
@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
 
         Post::create([
             'title' => 'The Flash',
-            'picture' => 'theflash.jfif',
+            'picture' => 'post-img/theflash.jfif',
             'category_id' => 1,
             'user_id' => 1,
             'visibility' => 'Private',
@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Captain America',
-            'picture' => 'captainamerica.jfif',
+            'picture' => 'post-img/captainamerica.jfif',
             'category_id' => 1,
             'user_id' => 2,
             'visibility' => 'Public',
@@ -116,7 +116,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Doctor Strange',
-            'picture' => 'doctorstrange.jfif',
+            'picture' => 'post-img/doctorstrange.jfif',
             'category_id' => 4,
             'user_id' => 1,
             'visibility' => 'Public',
@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Black Panther',
-            'picture' => 'blackpanther.jfif',
+            'picture' => 'post-img/blackpanther.jfif',
             'category_id' => 4,
             'user_id' => 2,
             'visibility' => 'Public',
@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
         
         Post::create([
             'title' => 'Green Lantern',
-            'picture' => 'greenlantern.jfif',
+            'picture' => 'post-img/greenlantern.jfif',
             'category_id' => 1,
             'user_id' => 1,
             'visibility' => 'Public',

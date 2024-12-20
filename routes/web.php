@@ -48,17 +48,29 @@ Route::middleware('auth')->group(function (){
         
     Route::get('my-post/all', [PostController::class, 'personal_post']);
     
-    Route::get('my-post/createPost', [PostController::class, 'create_new_post']);
+    Route::get('my-post/newPost', [PostController::class, 'new_post']);
+
+    Route::get('my-post/editPost/{post:slug}', [PostController::class, 'edit_post']);
+    
+    Route::post('my-post/updatePost/{post:slug}', [PostController::class, 'update_post']);
+    
+    Route::get('my-post/saveEditPost', [PostController::class, 'save_edit_post']);
+    
+    Route::post('my-post/createPost', [PostController::class, 'create_post']);
+
+    Route::post('my-post/deletePost/{post:slug}', [PostController::class, 'delete_post']);
+    
+    Route::get('my-post/createSlug', [PostController::class, 'checkSlug']);
 
     Route::get('my-post/{category:slug}', [PostController::class, 'personal_post_per_category']);
+
+    Route::get('user/profile', [UserController::class, 'index']);
 
     Route::get('blog', [PostController::class, 'index']);
     
     Route::get('blog/{post:slug}', [PostController::class, 'show']);
     
     Route::get('my-post/detail/{post:slug}', [PostController::class, 'show']);
-    
-    Route::get('my-post/createSlug', [PostController::class, 'checkSlug']);
     
     Route::get('categories/', [CategoryController::class, 'show_categories']);
 });

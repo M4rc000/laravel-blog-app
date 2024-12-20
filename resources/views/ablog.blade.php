@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="card mb-5" style="width: 100%; height: 30%">
-        <img src="/assets/img/posts/{{ $post->picture }}" class="card-img-top" alt="{{ $post->picture }}"  style="height: 300px">
+        <img src="{{ asset('storage') . '/' .  $post->picture }}" class="card-img-top" alt="{{ $post->picture }}"  style="height: 300px">
         <div class="card-body">
             <div class="row">
                 <div class="col text-start">
@@ -16,7 +16,7 @@
             </div>
             <h5 class="card-text" style="text-decoration: none; color: #002e63; font-size: 24px">{{ $post->category->name }}</h5>
             <h6 class="card-text text-secondary" style="font-size: 21px">By {{ $post->user->name }}</h6>
-            <p class="card-text" style="text-align: justify; font-size: 20px">{{ $post->body }}</p>
+            <p class="card-text" style="text-align: justify; font-size: 20px">{!! $post->body !!}</p>
         </div>
         <div class="card-footer">
             <div class="row">

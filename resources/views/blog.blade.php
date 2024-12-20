@@ -27,7 +27,7 @@
     </div>
 </div>
 <div class="card mb-3">
-    <img src="{{ asset('assets/img/posts/' . $posts[0]->picture) }}"
+    <img src="{{ asset('storage') . '/' .  $posts[0]->picture }}"
         class="card-img-top img-fluid" alt="{{ $posts[0]->title }}" style="height: auto; max-height: 400px;">
     <div class="card-body">
         <div class="row">
@@ -66,7 +66,7 @@
     @foreach ($posts->skip(1) as $post)
     <div class="col mt-3">
         <div class="card h-100 shadow">
-            <img src="/assets/img/posts/{{ $post->picture }}" class="card-img-top img-fluid" alt="{{ $post->picture }}"
+            <img src="{{ asset('storage') . '/' .  $post->picture }}" class="card-img-top img-fluid" alt="{{ $post->title }}"
                 style="height: auto; max-height: 250px;">
             <div class="card-body">
                 <div class="row">
