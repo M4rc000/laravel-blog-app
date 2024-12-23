@@ -19,18 +19,24 @@ class DatabaseSeeder extends Seeder
         
         User::create([
             'name' => 'Marco Antonio',
-            'picture' => 'default.jpg',
+            'picture' => 'profile-img/default.jpg',
             'username' => 'mrcantnio',
             'gender' => 'Male',
+            'place_of_birth' => 'Bogor',
+            'birth_of_date' => '2003-11-03',
+            'country' => 'Indonesia',
             'email' => 'marcoantoniomadgaskar@gmail.com',
             'password' => bcrypt('12345'),
         ]);
         
         User::create([
             'name' => 'Kezya Ester',
-            'picture' => 'default.jpg',
+            'picture' => 'profile-img/default.jpg',
             'username' => 'kezyster',
             'gender' => 'Female',
+            'place_of_birth' => 'Jakarta',
+            'birth_of_date' => '2003-05-10',
+            'country' => 'Indonesia',
             'email' => 'kezyaester@gmail.com',
             'password' => bcrypt('12345'),
         ]);

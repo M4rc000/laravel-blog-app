@@ -24,14 +24,7 @@
             <i class="fas fa-fw fa-home"></i>
             <span class="span-title">Home</span></a>
     </li>
-
-    <!-- Nav Item - About -->
-    <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
-        <a class="nav-link" href="/about">
-            <i class="fas fa-fw fa-info"></i>
-            <span class="span-title">About</span></a>
-    </li>
-
+    
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item {{ Request::is('my-post/*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -61,9 +54,9 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Category</h6>
-                <a class="collapse-item" href="/blog">all</a>
+                <a class="collapse-item" href="/explore/all">all</a>
                 @foreach ($categories as $category)
-                    <a class="collapse-item" href="cards.html">{{ $category->name }}</a>
+                    <a class="collapse-item" href="/explore/{{ $category->slug }}">{{ $category->name }}</a>
                 @endforeach
             </div>
         </div>

@@ -12,6 +12,8 @@ class HomeController extends Controller
         
         return view('home/home', [
             'title' => 'Home',
+            'menu' => 'Home',
+            'submenu' => '',
             'post_count' => Post::latest()->filter(request(['search', 'category', 'user'])),
             'posts' => Post::latest()->filter(request(['search', 'category', 'user']))->paginate(7)->withQueryString(),
             'categories' => Category::withCount('posts')->get()

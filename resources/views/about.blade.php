@@ -3,7 +3,7 @@
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
         <div class="col-md-4">
-            <img src="/assets/img/profile/{{ $user->picture }}" class="img-fluid rounded-start" alt="{{ $user->picture }}">
+            <img src="{{ asset('storage') . '/' . $user->picture }}" class="img-fluid rounded-start" alt="{{ $user->picture }}">
         </div>
         <div class="col-md-8">
             <div class="card-body">

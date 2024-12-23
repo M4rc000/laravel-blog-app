@@ -61,6 +61,16 @@ class Post extends Model
         });
     }
 
+    public function scopeExploreFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('body', 'like', '%' . $search . '%');
+            })
+            ->where('visibility', 'Public');
+        });
+    }
+
     public function category(){
         return $this->belongsTo(Category::class);
     }

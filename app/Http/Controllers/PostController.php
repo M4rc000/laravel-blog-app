@@ -34,6 +34,8 @@ class PostController extends Controller
 
         return view('my-post/my_post', [
             'title' => 'My Posts',
+            'menu' => 'My Posts',
+            'submenu' => 'All',
             'post_count' => $query->count(),
             'posts' => $query->paginate(7)->withQueryString(),
             'category' => 'all',
@@ -62,6 +64,8 @@ class PostController extends Controller
     public function show(Post $post){
         return view('ablog',[
             'title' => 'Single Blog',
+            'menu' => 'My-posts',
+            'submenu' => $post->title,
             'post' => $post,
             'categories' => Category::withCount('posts')->get()
         ]);
@@ -107,6 +111,8 @@ class PostController extends Controller
     {
         return view('my-post/edit_post', [
             'title' => 'My posts',
+            'menu' => 'My posts',
+            'submenu' => 'Edit post: '. $post->title,
             'post'=> $post,
             'categories' => Category::withCount('posts')->get()
         ]);
@@ -157,5 +163,35 @@ class PostController extends Controller
     public function checkSlug(Request $request){
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title); 
         return response()->json(['slug' => $slug]);   
+    }
+
+    public function explore_all(){
+
+        $query = Post::latest()->personalFilter(request(['search', 'category']));
+
+        return view('my-post/my_post', [
+            'title' => 'My Posts',
+            'menu' => 'Explore',
+            'submenu' => 'All',
+            'post_count' => $query->count(),
+            'posts' => $query->paginate(7)->withQueryString(),
+            'category' => 'all',
+            'categories' => Category::withCount('posts')->get()
+        ]);
+    }
+
+    public function explore_per_category(Category $category){
+        $query = Post::with(['user', 'category'])
+            ->where('category_id', $category->id)
+            ->postFilterCategory(request(['search']));
+
+        return view('my-post/my_post', [
+            'title' => 'Explore',
+            'menu' => 'Explore',
+            'submenu' => $category->name,
+            'posts' => $query->paginate(7)->withQueryString(),
+            'category' => $category,
+            'categories' => Category::withCount('posts')->get()
+        ]);
     }
 }

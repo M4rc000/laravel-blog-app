@@ -12,6 +12,7 @@
 	}
 </style>
 
+
 <form action="/my-post/{{ ($category == 'all' ? 'all' : $category->slug) }}">
     <div class="row justify-content-center mb-3">
         <div class="col-md-6 text-center">
@@ -42,11 +43,13 @@
             <div class="col text-start">
                 <h3 class="card-title text-primary" style="font-size: 35px">{{ $posts[0]->title }}</h3>
             </div>
-            <div class="col text-end d-flex justify-content-end align-items-center">
-                <h5 class="card-title">
-                    {!! $posts[0]->visibility == 'Public' ? '<i class="bi bi-eye-fill"></i>' : '<i class="bi bi-eye-slash-fill"></i>' !!}
-                </h5>                
-            </div>
+            @if ($menu == 'My posts')
+                <div class="col text-end d-flex justify-content-end align-items-center">
+                    <h5 class="card-title">
+                        {!! $posts[0]->visibility == 'Public' ? '<i class="bi bi-eye-fill"></i>' : '<i class="bi bi-eye-slash-fill"></i>' !!}
+                    </h5>                
+                </div>
+            @endif
         </div>
         <h6>
             <span style="color: #002e63">{{ $categories[0]->name }}</span>
@@ -62,12 +65,14 @@
                 <a class="badge badge-primary mx-1 p-2" href="/my-post/detail/{{ $posts[0]->slug }}" style="text-decoration: none">
                     <i class="bi bi-arrow-up-right-square"></i>
                 </a>
+                @if ($menu == 'My posts')
                 <a class="badge badge-warning mx-1 p-2" href="/my-post/editPost/{{ $posts[0]->slug }}" style="text-decoration: none">
                     <i class="bi bi-pencil"></i>
                 </a>
                 <a class="badge badge-danger mx-1 p-2" href="#" style="text-decoration: none" data-toggle="modal" data-target="#deleteModal{{ $posts[0]->slug }}">
                     <i class="bi bi-trash"></i>
                 </a>
+                @endif
             </div>
         </div>
     </div>
@@ -84,11 +89,13 @@
                     <div class="col text-start">
                         <h3 class="card-title text-primary" style="font-size: 25px">{{ $post->title }}</h3>
                     </div>
-                    <div class="col text-end d-flex justify-content-end align-items-center">
-                        <h5 class="card-title pt-1">
-                            {!! $posts[0]->visibility == 'Public' ? '<i class="bi bi-eye-fill"></i>' : '<i class="bi bi-eye-slash-fill"></i>' !!}
-                        </h5>                
-                    </div>
+                    @if ($menu == 'My posts')
+                        <div class="col text-end d-flex justify-content-end align-items-center">
+                            <h5 class="card-title pt-1">
+                                {!! $posts[0]->visibility == 'Public' ? '<i class="bi bi-eye-fill"></i>' : '<i class="bi bi-eye-slash-fill"></i>' !!}
+                            </h5>                
+                        </div>
+                    @endif
                 </div>
                 <a href="/blog?category={{ $post->category->slug }}" style="text-decoration: none; color: #002e63">
                     <h6 class="card-title">{{ $post->category->name }}</h6>
@@ -104,12 +111,14 @@
                         <a class="badge badge-primary mx-1 p-2" href="/my-post/detail/{{ $post->slug }}" style="text-decoration: none">
                             <i class="bi bi-arrow-up-right-square"></i>
                         </a>
+                        @if ($menu == 'My posts')
                         <a class="badge badge-warning mx-1 p-2" href="/my-post/editPost/{{ $post->slug }}" style="text-decoration: none">
                             <i class="bi bi-pencil"></i>
                         </a>
                         <a class="badge badge-danger mx-1 p-2" href="#" style="text-decoration: none" data-toggle="modal" data-target="#deleteModal{{ $post->slug }}">
                             <i class="bi bi-trash"></i>
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>

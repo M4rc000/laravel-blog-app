@@ -171,9 +171,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-size: 18px">{{ auth()->user()->username }}</span>
-                <img class="img-profile rounded-circle" src="{{ auth()->user()->picture == 'default.jpg' 
-                    ? asset('assets/home/img/' . (auth()->user()->gender == 'Male' ? 'undraw_profile.svg' : 'undraw_profile_3.svg')) 
-                    : asset('assets/home/img/user-profile/' . auth()->user()->picture) }}">
+                <img class="img-profile rounded-circle" src="{{ asset('storage') .'/'. auth()->user()->picture }}">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -182,15 +180,11 @@
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/settings">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Settings
                 </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
+                {{-- <div class="dropdown-divider"></div> --}}
                 <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
@@ -201,25 +195,31 @@
 </nav>
 <!-- End of Topbar -->
 
-<!-- Button trigger modal -->
+{{-- Breadcump --}}
+<ol class="breadcrumb mx-3 mb-0" style="background-color: #f8f9fd; font-size: 19px">
+    <li class="breadcrumb-item"><a href="#">{{ $menu }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ $submenu }}</li>
+</ol>
+<hr class="mx-4 mt-0 mb-5">
+{{-- End of Breadcump --}}
   
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center" id="exampleModalLabel">Do you want to logout?</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form action="/auth/logout" method="POST">
-            @csrf
-              <button type="submit" class="btn btn-primary">Yes, sure</button>
-          </form>
-        </div>
-      </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Do you want to logout?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-  </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form action="/auth/logout" method="POST">
+        @csrf
+            <button type="submit" class="btn btn-primary">Yes, sure</button>
+        </form>
+    </div>
+    </div>
+</div>
+</div>

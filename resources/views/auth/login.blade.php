@@ -33,7 +33,7 @@
                             <label class="pt-3 pb-5" for="username">Username</label>
                             <input type="text" class="form-control pt-4 @error('username')
                                 is-invalid
-                            @enderror" id="username" name="username" required autofocus>
+                            @enderror" id="username" name="username" required autofocus style="font-size: 17px">
                         </div>
 
                         @error('username')
@@ -46,7 +46,7 @@
                             <label class="pt-3 pb-5" for="password">Password</label>
                             <input type="password" class="form-control pt-4 @error('password')
                                 is-invalid
-                            @enderror" id="password" name="password" required>
+                            @enderror" id="password" name="password" required style="font-size: 17px">
                         </div>
 
                         @error('password')
@@ -97,5 +97,14 @@
                 });
             }, 5000); // 5000ms = 5 seconds
         }
+
+        @if (session()->has('success_registration'))   
+            Swal.fire({
+                title: "Success",
+                text: "{{ session('success_registration') }}",
+                icon: "success"
+            });
+        @endif
     });
+
 </script>
