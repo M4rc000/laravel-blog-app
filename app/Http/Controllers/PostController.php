@@ -55,6 +55,8 @@ class PostController extends Controller
 
         return view('my-post/my_post', [
             'title' => 'My Posts',
+            'menu' => 'My Posts',
+            'submenu' => $category->name,
             'posts' => $query->paginate(7)->withQueryString(),
             'category' => $category,
             'categories' => Category::withCount('posts')->get()
@@ -75,6 +77,8 @@ class PostController extends Controller
     {
         return view('my-post/new_post', [
             'title' => 'My posts',
+            'menu' => 'My Posts',
+            'submenu' => 'Create a new post',
             'categories' => Category::withCount('posts')->get()
         ]);
     }

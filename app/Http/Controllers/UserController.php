@@ -14,6 +14,8 @@ class UserController extends Controller
     public function index(){
         return view('user.user', [
             'title' => 'User profile',
+            'menu' => 'User',   
+            'submenu' => 'Profile',
             'categories' => Category::withCount('posts')->get()
         ]);
     }
@@ -48,6 +50,11 @@ class UserController extends Controller
             $validatedData['password'] = bcrypt($request->password);
         }
 
+        $validatedData['gender'] = $request->gender;
+        $validatedData['country'] = $request->country;
+        $validatedData['place_of_birth'] = $request->place_of_birth;
+        $validatedData['birth_of_date'] = $request->birth_of_date;
+
         // Update user data
         $result = User::where('id', $request->user_id)->update($validatedData);
 
@@ -72,6 +79,8 @@ class UserController extends Controller
     public function settings(){
         return view('user/settings', [
             'title' => 'Settings',
+            'menu' => 'User',   
+            'submenu' => 'Settings',
             'categories' => Category::withCount('posts')->get()
         ]);
     }

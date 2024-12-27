@@ -31,9 +31,15 @@
                         @csrf
                         <div class="form-group first">
                             <label class="pt-3 pb-5" for="username">Username</label>
-                            <input type="text" class="form-control pt-4 @error('username')
-                                is-invalid
-                            @enderror" id="username" name="username" required autofocus style="font-size: 17px">
+                            @if (session()->has('username'))
+                                <input type="text" class="form-control pt-4 @error('username')
+                                    is-invalid
+                                @enderror" id="username" name="username" required autofocus style="font-size: 17px" value="{{ session('username') }}">
+                            @else
+                                <input type="text" class="form-control pt-4 @error('username')
+                                    is-invalid
+                                @enderror" id="username" name="username" required autofocus style="font-size: 17px">
+                            @endif
                         </div>
 
                         @error('username')
@@ -86,6 +92,7 @@
 @endsection
 
 <script src="{{ asset('assets/auth/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{ asset('assets/home/vendor/sweetalert/sweetalert.js') }}"></script>
 <script>
     $(document).ready(function(){
         // Check if the alert exists

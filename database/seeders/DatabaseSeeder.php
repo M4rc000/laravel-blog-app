@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,8 @@ class DatabaseSeeder extends Seeder
             'country' => 'Indonesia',
             'email' => 'marcoantoniomadgaskar@gmail.com',
             'password' => bcrypt('12345'),
+            'remember_token' => random_int(1000, 9999),
+            'email_verified_at' => date('Y-m-d')
         ]);
         
         User::create([
@@ -39,6 +42,8 @@ class DatabaseSeeder extends Seeder
             'country' => 'Indonesia',
             'email' => 'kezyaester@gmail.com',
             'password' => bcrypt('12345'),
+            'remember_token' => random_int(1000, 9999),
+            'email_verified_at' => date('Y-m-d')
         ]);
         
         // User::factory(8)->create();

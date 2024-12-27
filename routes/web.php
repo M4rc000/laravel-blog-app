@@ -6,6 +6,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Mail; 
+use App\Mail\SendEmail;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+
+
 
 /*
 |----------------------------------------------------------------------
@@ -32,14 +38,25 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::post('auth/register', [AuthController::class, 'store']);
-
 Route::post('auth/logout', [AuthController::class, 'logout']);
 
+// EMAIL VERIFICATION
+Route::get('auth/verification-email', [AuthController::class, 'email_verification']);
+Route::post('auth/verification-sendOTP', [AuthController::class, 'email_verification_otp']);
+Route::post('auth/resend-otp', [AuthController::class, 'resend_otp'])->name('auth.resend_otp');
 
 // USER AUTHENTICATED
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
     Route::get('/user', function () {
         return redirect('/user/profile');
+    });
+
+    Route::get('/my-post', function () {
+        return redirect('/my-post/all');
+    });
+
+    Route::get('/explore', function () {
+        return redirect('/explore/all');
     });
 
     Route::get('home', [HomeController::class, 'index']);

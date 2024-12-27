@@ -1,5 +1,18 @@
 @extends('layouts.main')
 @section('container')
+    <style>
+        @media (max-width: 576px) {
+            .col-sm-2 {
+                text-align: left; /* Align label text to the left for smaller screens */
+            }
+
+            .col-sm-2,
+            .col-sm-10 {
+                flex: 0 0 100%; /* Full width for smaller screens */
+                max-width: 100%;
+            }
+        }
+    </style>
     <div class="row">
         <div class="col-lg-8">
             <form action="/user/edit" method="POST" enctype="multipart/form-data">
@@ -63,26 +76,36 @@
                     @enderror
                 </div>
                 <div class="form-group row">
-                    <label for="gender" class="col-sm-2 col-form-label">Gender</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender" value="{{ auth()->user()->gender }}" required>
+                    <div class="col-sm-2">
+                        <label for="gender" class="col-sm-2 col-form-label text-sm-left">Gender</label>
                     </div>
-                    @error('gender')
-                        <small class="text-danger pt-3 pb-1">
-                            {{ $message }}
-                        </small>
-                    @enderror
+                        <div class="col-sm-10">
+                        <select name="gender" id="gender" class="custom-select @error('gender') is-invalid @enderror">
+                            <option value="">Choose a gender</option>
+                            <option value="Male" {{ auth()->user()->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ auth()->user()->gender == 'Female' ? 'selected' : '' }}>Female</option>
+                        </select>
+                        @error('gender')
+                            <small class="text-danger pt-1">
+                                {{ $message }}
+                            </small>
+                        @enderror
+                    </div>
                 </div>
                 <div class="form-group row">
-                    <label for="country" class="col-sm-2 col-form-label">Country</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control @error('country') is-invalid @enderror" id="country" name="country" value="{{ auth()->user()->country }}">
+                    <div class="col-sm-2">
+                        <label for="country" class="text-sm-left">Country</label>
                     </div>
-                    @error('country')
-                        <small class="text-danger pt-3 pb-1">
-                            {{ $message }}
-                        </small>
-                    @enderror
+                    <div class="col-sm-10">
+                        <select name="country" id="country" class="form-control @error('country') is-invalid @enderror">
+                            <option value="" selected disabled>Select a country</option>
+                        </select>
+                        @error('country')
+                            <small class="text-danger pt-1">
+                                {{ $message }}
+                            </small>
+                        @enderror
+                    </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-2">Picture</div>
@@ -117,6 +140,9 @@
 
     <script>
         $(document).ready(function() {
+            $('#country').select2();
+            $('#gender').select2();
+
             @if (session()->has('success_update'))   
                 Swal.fire({
                     title: "Success",
@@ -130,7 +156,27 @@
                     text: "{{ session('failed_update') }}",
                     icon: "error"
                 });
-            @endif      
+            @endif 
+            
+            // Fetch country data from the API
+            $.ajax({
+                url: "https://restcountries.com/v3.1/all",
+                method: "GET",
+                success: function (data) {
+                    const countryDropdown = $('#country');
+                    const userCountry = "{{ auth()->user()->country }}"; // Fetch user's country
+
+                    // Loop through the API response and populate the select
+                    data.forEach(country => {
+                        const countryName = country.name.common; // Get the country's name
+                        const isSelected = userCountry == countryName ? 'selected' : ''; // Mark user's country as selected
+                        countryDropdown.append(`<option value="${countryName}" ${isSelected}>${countryName}</option>`);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching countries:", status, error);
+                }
+            });
         });
 
         function preview_image() {

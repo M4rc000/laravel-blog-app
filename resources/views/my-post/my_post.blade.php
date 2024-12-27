@@ -24,9 +24,11 @@
     </div>
 </form>
 
-<a href="/my-post/newPost">
-    <button type="button" class="btn btn-primary my-2">New post</button>
-</a>
+@if ($menu == 'My posts')
+    <a href="/my-post/newPost">
+        <button type="button" class="btn btn-primary my-2">New post</button>
+    </a>
+@endif
 
 
 @if ($posts->count())

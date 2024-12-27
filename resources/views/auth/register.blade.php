@@ -80,4 +80,17 @@
 
     </div>
 </div>
+
+<script src="{{ asset('assets/home/vendor/jquery/jquery.min.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        @if (session()->has('registration_failed'))   
+            Swal.fire({
+                title: "Error",
+                text: "{{ session('registration_failed') }}",
+                icon: "error"
+            });
+        @endif
+    });
+</script>
 @endsection
